@@ -1,33 +1,11 @@
-let myObj = {
-    id: 2,
-    printId(){
-        console.log(this.id);
-    }
-}
+console.log('%c [Javascript]', 'color:red; font-size: 1.5em')
+const arr = [5, 3, 8, 1, 4];
+arr.sort((a, b) => {
+    return b - a; // 降順
+});
+console.log(arr);
 
-// myObj.printId();
-
-const sayFoo = function(){
-    console.log(this['foo']);
-
-}
-
-foo = 'foo';
-
-const mySecondObj = {
-    foo: "I'm in the obj",
-    sayFoo
-}
-
-// sayFoo();
-mySecondObj.sayFoo();
-
-function MyObj(id){
-    this.id = id;
-}
-
-MyObj.prototype.printId = function(id){
-    console.log(this.id);
-}
-
-const newInstance = new MyObj(5);
+arr.sort((a, b) => {
+    return a - b; // 昇順
+});
+console.log(arr);
