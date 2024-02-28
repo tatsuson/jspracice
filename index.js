@@ -1,12 +1,33 @@
 console.log('%c [Javascript]', 'color:red; font-size: 1.5em')
 
-function wait(callback, num){
-    setTimeout(() => {
-        console.log(num);
-        callback();
-    }, 100);
+function wait(num){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log(num);
+            if(num === 2){
+                reject(num);
+            }else{
+                resolve(num);
+            }
+        }, 1000);
+
+    });
 }
 
-wait(() => {
-    console.log('callback function is called');
-}, 0);
+wait(0).then(num => {
+    num++;
+    wait(num)
+    return num;
+}).then(num => {
+    num++;
+    return wait(num);
+}).then(num => {
+    num++;
+    return wait(num);
+}).then(num => {
+    num++;
+    return wait(num);
+}).catch(num => {
+    num++;
+   console.error(num, 'error');
+})
