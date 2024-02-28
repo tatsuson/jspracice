@@ -9,25 +9,15 @@ function wait(num){
             }else{
                 resolve(num);
             }
-        }, 1000);
+        }, num);
 
     });
 }
 
-wait(0).then(num => {
-    num++;
-    wait(num)
-    return num;
-}).then(num => {
-    num++;
-    return wait(num);
-}).then(num => {
-    num++;
-    return wait(num);
-}).then(num => {
-    num++;
-    return wait(num);
-}).catch(num => {
-    num++;
-   console.error(num, 'error');
+// Promise.all([wait(1000), wait(1500), wait(2000)]).then(nums => {
+//     console.log(nums)
+// })
+
+Promise.race([wait(1000), wait(1500), wait(2000)]).then(nums => {
+    console.log(nums + 1)
 })
