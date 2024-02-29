@@ -1,7 +1,16 @@
-console.log('%c [Javascript]', 'color:red; font-size: 1.5em')
+// async function sample(){
+//     const num = await asyncFn();
+//     num++;
+//     return num;
+// }
+
+// asyncFn(0).then(num => {
+//     num++;
+//     return num;
+// })
 
 function wait(num){
-    return new Promise((resolve, reject) => {
+    return new Promise(function (resolve, reject){
         setTimeout(() => {
             console.log(num);
             if(num === 2){
@@ -9,15 +18,37 @@ function wait(num){
             }else{
                 resolve(num);
             }
-        }, num);
-
+        }, 100);
     });
 }
 
-// Promise.all([wait(1000), wait(1500), wait(2000)]).then(nums => {
-//     console.log(nums)
-// })
+async function init(){
+    let num = 0;
+    try{
+        num = await wait(num);
+        num++;
+        num = await wait(num);
+        num++;
+        num = await wait(num);
+        num++;
+    }catch(e){
+        throw new Error('Error is occured!', e)
+    }
+    return num;
+}
+console.log(init());
 
-Promise.race([wait(1000), wait(1500), wait(2000)]).then(nums => {
-    console.log(nums + 1)
-})
+async function hello() {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve("Hello");
+        }, 2000);
+    });
+}
+
+async function sayHello() {
+    const msg = await hello();
+    console.log(msg); // 2秒後に"Hello"が出力される
+}
+
+sayHello();
